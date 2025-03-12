@@ -1,24 +1,22 @@
 name: Post JSON File to Two URLs
 on:
- push:
-  branches:
-   - main # Runs only when pushing to the main branch
- workflow_dispatch: # Allows manual trigger
+push:
+branches:
+- main # Runs only when pushing to the main branch
+workflow_dispatch: # Allows manual trigger
 jobs:
- post_json:
-  runs-on: ubuntu-latest
-   steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-      
-    - name: Send JSON Data to First URL
-      run: |
-       curl -X POST "https://:WfagLh0iQRiKfNdURU9r-A@tandem.autodesk.com/api/v1/timeseries/models/urn:adsk.dtm:ULhgMjvIReygaz-Yfe6X5Q/streams/AQAAANPTUh0cOUvqi33TGhOA8HwAAAAA" \
-          -H "Content-Type: application/json" \
-          -d @stream.json
-          
-    - name: Send JSON Data to Second URL
-      run: |
-       curl -X POST "https://:qN1OFkw1T22wKnJG26f-zQ@tandem.autodesk.com/api/v1/timeseries/models/urn:adsk.dtm:ULhgMjvIReygaz-Yfe6X5Q/streams/AQAAAJXTg_gM30UJk33Jz_A8QEEAAAAA" \
-          -H "Content-Type: application/json" \
-          -d @stream.json
+post_json:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout Repository
+uses: actions/checkout@v3
+- name: Send JSON Data to First URL
+run: |
+curl -X POST "https://:WfagLh0iQRiKfNdURU9r-A@tandem.autodesk.com/api/v1/timeseries/models/urn:adsk.dtm:ULhgMjvIReygaz-Yfe6X5Q/streams/AQAAANPTUh0cOUvqi33TGhOA8HwAAAAA" \
+-H "Content-Type: application/json" \
+-d @stream.json
+- name: Send JSON Data to Second URL
+run: |
+curl -X POST "https://:qN1OFkw1T22wKnJG26f-zQ@tandem.autodesk.com/api/v1/timeseries/models/urn:adsk.dtm:ULhgMjvIReygaz-Yfe6X5Q/streams/AQAAAJXTg_gM30UJk33Jz_A8QEEAAAAA" \
+-H "Content-Type: application/json" \
+-d @stream.json
